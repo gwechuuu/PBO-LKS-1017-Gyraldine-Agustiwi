@@ -1,22 +1,22 @@
-# LKS PBO — REST API Perpustakaan
+# Sistem Perpustakaan — REST API (PHP OOP) & Frontend
 
-REST API manajemen data buku berbasis PHP 8.1 dan MySQL dengan arsitektur berlapis (`Core`, `Models`, `Contracts`, `Repositories`, `Services`, `Controllers`, `Exceptions`) serta autoloading PSR-4 (`App\`).
+Aplikasi manajemen data buku dan kategori berbasis arsitektur berlapis (`Core`, `Models`, `Contracts`, `Repositories`, `Services`, `Controllers`, `Exceptions`) menggunakan PHP 8.1+, PDO Singleton, kustom `Router` dan `Container`, serta antarmuka web `frontend-perpustakaan`.
 
 ## Struktur Folder Utama
-- `public/index.php` — Entry point dan global error handler
-- `src/Core/` — `Request`, `Response`, `Router`, `Container`
-- `src/Config/` & `src/Database/` — `Env`, `Connection` (Singleton PDO)
-- `src/Models/` — `Book`
-- `src/Contracts/` — `BookRepositoryInterface`
-- `src/Repositories/` — `MySQLBookRepository`
-- `src/Services/` — `BookService`
-- `src/Controllers/` — `BookController`
-- `src/Exceptions/` — `ValidationException`, `NotFoundException`, `DatabaseException`
-- `tests/` — `BookServiceTest.php` & `run_tests.php`
+- `public/index.php` — *Entry point*, registrasi *container*, pendaftaran *route*, CORS, dan *global exception handler*
+- `src/Core/` — `Container`, `Request`, `Response`, `Router`
+- `src/Database/` — `Connection` (PDO Singleton)
+- `src/Models/` — `Book`, `Category`
+- `src/Contracts/` — `BookRepositoryInterface`, `CategoryRepositoryInterface`
+- `src/Repositories/` — `MySQLBookRepository`, `MySQLCategoryRepository`
+- `src/Services/` — `BookService`, `CategoryService`
+- `src/Controllers/` — `BookController`, `CategoryController`
+- `src/Exceptions/` — `HttpException`, `ConflictException`, `NotFoundException`, `ValidationException`, `DatabaseException`
+- `tests/` — `BookServiceTest.php`, `run_tests.php`
+- `frontend-perpustakaan/` — `index.html`, `style.css`, `app.js`
 
-## Cara Menjalankan
-1. Pastikan MySQL di Laragon aktif dan database `perpustakaan` beserta tabel `books` sudah tersedia.
-2. Sesuaikan konfigurasi `.env` dari `.env.example`.
-3. Jalankan server pengembangan PHP:
+## Menjalankan Aplikasi
+1. Pastikan layanan MySQL aktif dan database/tabel sudah sesuai (`database/schema.sql`).
+2. Jalankan server REST API:
    ```bash
    php -S 127.0.0.1:8000 -t public
